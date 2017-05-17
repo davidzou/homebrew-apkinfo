@@ -1,6 +1,6 @@
 #!/bin/bash
 # ****************************************************************************************
-#  [脚本标题描述] 
+#  [脚本标题描述]
 #  version    : 1.0.0
 #  author     : DavidZou -- wearecisco@gmail.com
 #  date       : 2017.05.07
@@ -64,7 +64,7 @@ ROOT="."
 if [ -n "${HJ_BUILD_HOME}" ] ; then
     ROOT=${HJ_BUILD_HOME}
 else
-    RESULT=`which hjbuild`
+    RESULT=`which apkinfo`
     if [ -z "${RESULT}" ] ; then
         echo "Not find command 'hjbuild'. Please install it."
         exit 1
@@ -72,24 +72,23 @@ else
     ROOT=${RESULT%/*}
 fi
 
-. ${ROOT}/function/logger.sh
-printProgress "Configuration"
-. ${ROOT}/common/common.sh
-. ${ROOT}/common/check_command.sh
-. ${ROOT}/function/hjdailybuild_options.sh
-# if argument is not null
-if [ -z $1 ] ; then
-    printLint "No argument apk file"
-    exit 1
-fi
+# . ${ROOT}/function/logger.sh
+# printProgress "Configuration"
+# . ${ROOT}/common/common.sh
+# . ${ROOT}/common/check_command.sh
+# . ${ROOT}/function/hjdailybuild_options.sh
+# # if argument is not null
+# if [ -z $1 ] ; then
+#     printLint "No argument apk file"
+#     exit 1
+# fi
+#
+# # check command
+# check_command_aapt
 
-# check command
-check_command_aapt
-
+echo "Hello erery body!!!
 
 
 
 # 显示所有的meta-data信息并以字母排序
 # aapt dump --include-meta-data badging hjdict2_cichang_2.0.0.100.251159.apk | grep meta-data | cut -d " " -f2-3 | cut -d "'" -f2,4 | column -t -s "'" | sort
-
-

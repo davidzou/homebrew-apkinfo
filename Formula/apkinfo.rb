@@ -7,7 +7,6 @@ class Apkinfo < Formula
 
   def install
     bin.install "apkinfo"
-    bin.mkpath "apkinfo_tools"
   end
 
   test do
