@@ -1,0 +1,19 @@
+=========================================================================
+                             Build app shell
+=========================================================================
+Version :       1.0.0
+Author  :       DavidZou -- wearecisco@gmail.com
+Date    :       2017.05.10
+
+Usage   :
+        Command [-OPTION] VALUE
+
+ [OPTION]
+        -f | --apk-file    apk file
+
+ [Example]
+        apkinfo /path/to/xxx.apk
+
+ [LEGACY DESCRIPTION]
+
+=========================================================================
