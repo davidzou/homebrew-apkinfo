@@ -1,5 +1,7 @@
 class Apkinfo < Tap
-  def install
+  name "apkinfo"
+
+  def install(options == {})
     prefix.install "apkinfo.sh"
   end
 
