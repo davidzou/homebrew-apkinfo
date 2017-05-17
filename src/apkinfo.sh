@@ -5,7 +5,7 @@
 #  author     : DavidZou -- wearecisco@gmail.com
 #  date       : 2017.05.07
 #
-#  [功能]:
+#  [功能]: 通过命令行查看apk包中的信息
 #
 #  [执行流程]:
 #
