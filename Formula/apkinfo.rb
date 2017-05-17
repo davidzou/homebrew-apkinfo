@@ -6,7 +6,7 @@ class Apkinfo < Formula
   version '1.0'
 
   def install
-    libexec.install Dir["apkinfo/*"]
+    libexec.install Dir["*"]
     bin.install_symlink libexec/"apkinfo"
   end
 
