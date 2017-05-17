@@ -1,4 +1,4 @@
-class apkinfo < Formula
+class apkinfo < Tap
   homepage "https://github.com/davidzou/homebrew-apkinfo"
   url "https://github.com/davidzou/homebrew-apkinfo/apkinfo-1.0.0.tar.gz"
   sha256 "no_check"
