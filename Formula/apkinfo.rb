@@ -2,16 +2,16 @@ class Apkinfo < Formula
   homepage ''
   url 'https://github.com/davidzou/homebrew-apkinfo/raw/master/apkinfo.tar.gz'
   desc 'Apkinfo test'
-  sha256 'c2cb06149da4dcdc3706162dfc788deec5cf5245f8b51473f4ad8cefc8ed57c3'
+  sha256 '75f51d9b6728046622000aecf6e20a16bfd02b5e4b24f731ed3a01e6c2513da8'
   version '1.0'
 
   def install
-    libexec.install Dir["*"]
+    libexec.install Dir["src/*"]
     bin.install_symlink libexec/"apkinfo"
   end
 
   test do
-    system "false"
+    system "#{bin}/apkinfo"
   end
 
 end
