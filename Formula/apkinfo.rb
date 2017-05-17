@@ -6,7 +6,7 @@ class Apkinfo < Formula
   version '1.0'
 
   def install
-    bin.install "apkinfo"
+    libexec.install "apkinfo"
   end
 
   test do
