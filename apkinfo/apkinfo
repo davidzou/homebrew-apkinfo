@@ -59,36 +59,5 @@ function getValueMeta(){
 # ====================
 # 环境参数及类管理
 # ====================
-ROOT="."
-
-if [ -n "${HJ_BUILD_HOME}" ] ; then
-    ROOT=${HJ_BUILD_HOME}
-else
-    RESULT=`which apkinfo`
-    if [ -z "${RESULT}" ] ; then
-        echo "Not find command 'hjbuild'. Please install it."
-        exit 1
-    fi
-    ROOT=${RESULT%/*}
-fi
-
-# . ${ROOT}/function/logger.sh
-# printProgress "Configuration"
-# . ${ROOT}/common/common.sh
-# . ${ROOT}/common/check_command.sh
-# . ${ROOT}/function/hjdailybuild_options.sh
-# # if argument is not null
-# if [ -z $1 ] ; then
-#     printLint "No argument apk file"
-#     exit 1
-# fi
-#
-# # check command
-# check_command_aapt
 
 echo "Hello erery body!!!
-
-
-
-# 显示所有的meta-data信息并以字母排序
-# aapt dump --include-meta-data badging hjdict2_cichang_2.0.0.100.251159.apk | grep meta-data | cut -d " " -f2-3 | cut -d "'" -f2,4 | column -t -s "'" | sort
