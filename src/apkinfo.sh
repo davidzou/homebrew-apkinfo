@@ -60,4 +60,7 @@ function getValueMeta(){
 # 环境参数及类管理
 # ====================
 
-echo "Hello erery body!!!
+echo "Hello erery body!!!"
+
+check_command_aapt
+echo ${AAPT_HOME}
