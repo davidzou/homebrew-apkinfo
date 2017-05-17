@@ -2,7 +2,7 @@ class Apkinfo < Formula
   homepage ''
   url 'https://github.com/davidzou/homebrew-apkinfo/raw/master/apkinfo.tar.gz'
   desc 'Apkinfo test'
-  sha256 '2aac8271e35efb92ec33a869adba244ffc5b5cd369f6688dcee11c1ad01a4e80'
+  sha256 '88ad36ea844eeed0418a596a60f09586f723fcf3051f41e9a427d59bd8373156'
   version '1.0'
 
   def install
