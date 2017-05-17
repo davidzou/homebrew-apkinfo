@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd apkinfo; tar -zcf apkinfo.tar.gz apkinfo; mv apkinfo.tar.gz ../; cd -
+tar -zcf apkinfo.tar.gz src
 
 shasum -a 256 apkinfo.tar.gz | cut -d " " -f1
 
