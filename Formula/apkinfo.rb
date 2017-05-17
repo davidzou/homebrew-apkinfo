@@ -6,7 +6,7 @@ class Apkinfo < Formula
   version '1.0'
 
   def install
-    bin.install "apkinfo.sh"
+    bin.install "src/apkinfo.sh"
     bin.install_symlink libexec/"apkinfo.sh" => "apkinfo"
   end
 
