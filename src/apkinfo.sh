@@ -45,7 +45,7 @@ function check_command_aapt() {
 # $3 分隔位置
 ######################
 function getValue(){
-    value=`aapt dump --include-meta-data badging $1 | grep $2 | cut -d " " -f$3 | cut -d = -f2 | cut -d \' -f2`
+    value=`${AAPT_HOME}/aapt dump --include-meta-data badging $1 | grep $2 | cut -d " " -f$3 | cut -d = -f2 | cut -d \' -f2`
     echo ${value}
 }
 
