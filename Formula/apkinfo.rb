@@ -7,5 +7,6 @@ class Apkinfo < Formula
 
   def install
     bin.install "apkinfo"
+    lib.install "tools"
   end
 end
