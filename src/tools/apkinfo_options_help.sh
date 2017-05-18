@@ -53,9 +53,17 @@ if [ $# -gt 0 ] ; then
                     --)
                         shift
                         ;;
-                    *) echo "Internal error! Unknown argument that $1." ; exit 1 ;;
+                    *)
+                        if [[ $1 =~ ".apk" ]] ; then
+                            APK_FILE=$1
+                        else
+                            echo "Internal error! Unknown argument that $1."
+                            exit 1
+                        fi
+                    ;;
             esac
     done
 else
     show_help
+    exit 0
 fi

@@ -85,4 +85,6 @@ fi
 printInfo "Hello erery body!!!"
 
 check_command_aapt
-echo ${AAPT_HOME}
+printInfo "The command 'aapt' be found at ${AAPT_HOME}"
+
+getValue ${APK_FILE} versionName 2
