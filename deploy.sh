@@ -16,9 +16,10 @@
 # ****************************************************************************************
 
 function deployed() {
-    cp ./src/apkinfo.sh $1/apkinfo
+    mkdir -p $1/tools
+    cp src/apkinfo.sh $1/apkinfo
 
-    chmod +x $1/apkinfo
+    chmod 0744 $1/apkinfo
 
     echo "
 export PATH=$PATH:$1" > ~/.bash_profile

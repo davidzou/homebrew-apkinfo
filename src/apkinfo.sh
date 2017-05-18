@@ -17,7 +17,7 @@
 
 # 命令版本
 APKINFO_VERSION="0.0.1"
-BREW_HOME="/usr/local/Cellar/apkinfo/${APKINFO_VERSION}"
+BREW_HOME="/usr/local/Cellar/apkinfo.sh/${APKINFO_VERSION}"
 
 ######################
 # 检测系统是否配置了aapt命令
@@ -60,19 +60,17 @@ function getValueMeta(){
     echo ${value}
 }
 
-#. ./lib/tools/apkinfo_options_help.sh
-
 # ====================
 # 环境参数及类管理
 # ====================
 # 如果配置文件存在的则读取配置文件，deploy的和brew安装的区别就是不会创建文件夹
 if [ ! -d ~/.apkinfo ] ; then
     mkdir -p ~/.apkinfo
-    echo "apkinfo.home=${BREW_HOME}" > ~/.apkinfo/apkinfo.rc
+    echo "apkinfo.sh.home=${BREW_HOME}" > ~/.apkinfo/apkinfo.rc
     ROOT=${BREW_HOME}/include
 else
     # 读取命令所在的目录
-    if [ ! -f ~/.apkinfo/apkinf.rc ] ; then
+    if [ ! -f ~/.apkinfo/apkinfo.rc ] ; then
         echo "[Error] Install failed. To retry invoked deploy.sh or install by brew."
         exit 1
     fi
@@ -82,6 +80,7 @@ fi
 echo ${ROOT}
 # Loading Dependencies
 . ${ROOT}/tools/logger.sh
+. ${ROOT}/tools/apkinfo_options_help.sh
 
 
 printInfo "Hello erery body!!!"
