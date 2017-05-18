@@ -66,7 +66,7 @@ function getValueMeta(){
 # 如果配置文件存在的则读取配置文件，deploy的和brew安装的区别就是不会创建文件夹
 if [ ! -d ~/.apkinfo ] ; then
     mkdir -p ~/.apkinfo
-    echo "apkinfo.sh.home=${BREW_HOME}" > ~/.apkinfo/apkinfo.rc
+    echo "apkinfo.home=${BREW_HOME}" > ~/.apkinfo/apkinfo.rc
     ROOT=${BREW_HOME}/include
 else
     # 读取命令所在的目录
@@ -74,7 +74,7 @@ else
         echo "[Error] Install failed. To retry invoked deploy.sh or install by brew."
         exit 1
     fi
-    ROOT=`cat ~/.apkinfo/apkinfo.rc | grep apkinfo | cut -d = -f2-`
+    ROOT=`cat ~/.apkinfo/apkinfo.rc | grep apkinfo.home | cut -d = -f2-`
 fi
 
 echo ${ROOT}

@@ -18,11 +18,18 @@
 function deployed() {
     mkdir -p $1/tools
     cp src/apkinfo.sh $1/apkinfo
+    cp -r src/tools $1
 
     chmod 0744 $1/apkinfo
 
-    echo "
-export PATH=$PATH:$1" > ~/.bash_profile
+    if [ -d ~/.apkinfo ] ; then
+        rm -rf ~/.apkinfo
+    fi
+    mkdir -p ~/.apkinfo
+    echo "apkinfo.home=${1%/*}" > ~/.apkinfo/apkinfo.rc
+
+#    echo "export PATH=\$PATH:$1" >> ~/.bash_profile
+#    source ~/.bash_profile
 }
 
 if [ -n "$1" ] ; then
