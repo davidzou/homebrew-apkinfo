@@ -66,7 +66,7 @@ function getValueMeta(){
 # 如果配置文件存在的则读取配置文件，deploy的和brew安装的区别就是不会创建文件夹
 if [ ! -d ~/.apkinfo ] ; then
     mkdir -p ~/.apkinfo
-    echo "apkinfo.home=${BREW_HOME}" > ~/.apkinfo/apkinfo.rc
+    echo "apkinfo.home=${BREW_HOME}/include" > ~/.apkinfo/apkinfo.rc
     ROOT=${BREW_HOME}/include
 else
     # 读取命令所在的目录
