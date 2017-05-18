@@ -80,9 +80,11 @@ echo ${pwd}/${0}
 [[ $0 =~ ^/  ]] && a=$0 || a=`pwd`/$0
 while [ -h $a ]
 do
-
-   b=`ls -ld $a|awk '{print $NF}'`
-   c=`ls -ld $a|awk '{print $(NF-2)}'`
+   b=`ls -ld $a | awk '{print $NF}'`
+   c=`ls -ld $a | awk '{print $(NF-2)}'`
    [[ $b =~ ^/ ]] && a=$b  || a=`dirname $c`/$b
 done
 echo $a
+
+DIR=`S=\`readlink "$0"\`; [ -z "$S" ] && S=$0; dirname $S`
+echo ${DIR}
