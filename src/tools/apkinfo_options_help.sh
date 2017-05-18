@@ -54,13 +54,14 @@ if [ $# -gt 0 ] ; then
                         shift
                         ;;
                     *)
+                        shift $#
                         if [[ $1 == *".apk" ]] ; then
                             APK_FILE=$1
                         else
                             echo "Internal error! Unknown argument that $1."
                             exit 1
                         fi
-                    ;;
+                        ;;
             esac
     done
 else
