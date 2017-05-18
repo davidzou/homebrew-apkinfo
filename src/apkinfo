@@ -56,7 +56,7 @@ function getValueMeta(){
     echo ${value}
 }
 
-. ./lib/tools/apkinfo_options_help.sh
+#. ./lib/tools/apkinfo_options_help.sh
 
 # ====================
 # 环境参数及类管理
@@ -67,7 +67,11 @@ echo "Hello erery body!!!"
 check_command_aapt
 echo ${AAPT_HOME}
 
-if [ $1 =~ "apk" ] ; then
-    # 直接执行解析，默认显示数据
-    echo "aok"
-fi
+#if [ $1 =~ "apk" ] ; then
+#    # 直接执行解析，默认显示数据
+#    echo "aok"
+#fi
+
+echo "`pwd`"
+echo "${0}"
+echo "${pwd}/${0}"
