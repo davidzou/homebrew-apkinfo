@@ -18,8 +18,8 @@ cp -r src/tools ${BUILD_HOME}
 cp src/apkinfo ${BUILD_HOME}
 
 rm tarball/${FILE_NAME}
-tar -cvf tarball/${FILE_NAME} -C build apkinfo/
-tar tf tarball/${FILE_NAME}
+tar -cvf tarball/${FILE_NAME} -C ${BUILD_HOME} apkinfo/
+tar -zvtf tarball/${FILE_NAME}
 SHA256=`shasum -a 256 tarball/${FILE_NAME} | cut -d " " -f1`
 
 echo "========================================================="
@@ -29,7 +29,7 @@ echo "========================================================="
 sed -ig "s/sha256.*/sha256 '${SHA256}'/g" Formula/apkinfo.rb
 rm Formula/apkinfo.rbg
 
-cat Formula/apkinfo.rb
+#cat Formula/apkinfo.rb
 
 #rm ~/Library/Caches/Homebrew/apkinfo*
 #
