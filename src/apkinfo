@@ -76,3 +76,13 @@ echo "`pwd`"
 echo ${pwd}
 echo ${0}
 echo ${pwd}/${0}
+
+[[ $0 =~ ^/  ]] && a=$0 || a=`pwd`/$0
+while [ -h $a ]
+do
+
+   b=`ls -ld $a|awk '{print $NF}'`
+   c=`ls -ld $a|awk '{print $(NF-2)}'`
+   [[ $b =~ ^/ ]] && a=$b  || a=`dirname $c`/$b
+done
+echo $a
