@@ -56,7 +56,7 @@ function getValueMeta(){
     echo ${value}
 }
 
-. ./tools/apkinfo_options_help.sh
+. ./lib/tools/apkinfo_options_help.sh
 
 # ====================
 # 环境参数及类管理
