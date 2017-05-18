@@ -73,5 +73,6 @@ echo ${AAPT_HOME}
 #fi
 
 echo "`pwd`"
-echo "${0}"
-echo "${pwd}/${0}"
+echo ${pwd}
+echo ${0}
+echo ${pwd}/${0}
