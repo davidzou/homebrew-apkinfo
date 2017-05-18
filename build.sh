@@ -15,7 +15,7 @@ fi
 
 mkdir -p ${BUILD_HOME}
 cp -r src/tools ${BUILD_HOME}
-cp src/apkinfo ${BUILD_HOME}
+cp src/apkinfo.sh ${BUILD_HOME}
 
 rm tarball/${FILE_NAME}
 tar -cvf tarball/${FILE_NAME} -C ${BUILD_HOME} apkinfo.sh tools/
