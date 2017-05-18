@@ -17,7 +17,7 @@
 
 # 命令版本
 APKINFO_VERSION="0.0.1"
-BREW_HOME="/usr/local/Cellar/apkinfo/${APKINFO_VERSION}/"
+BREW_HOME="/usr/local/Cellar/apkinfo/${APKINFO_VERSION}"
 
 ######################
 # 检测系统是否配置了aapt命令
