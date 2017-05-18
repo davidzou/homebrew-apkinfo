@@ -69,7 +69,7 @@ function getValueMeta(){
 if [ ! -d ~/.apkinfo ] ; then
     mkdir -p ~/.apkinfo
     echo "apkinfo.home=${BREW_HOME}" > ~/.apkinfo/apkinfo.rc
-    ROOT=${BREW_HOME}
+    ROOT=${BREW_HOME}/include
 else
     # 读取命令所在的目录
     if [ ! -f ~/.apkinfo/apkinf.rc ] ; then
@@ -80,9 +80,11 @@ else
 fi
 
 echo ${ROOT}
+# Loading Dependencies
+. ${ROOT}/tools/logger.sh
 
 
-echo "Hello erery body!!!"
+printInfo "Hello erery body!!!"
 
 check_command_aapt
 echo ${AAPT_HOME}
