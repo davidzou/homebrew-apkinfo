@@ -12,6 +12,11 @@ A command what to look up a apk info, that include meta-data applicationid versi
      brew instal apkinfo
     ```
 
+* shell
+    
+    ```
+     bash deploy.sh ${dest}
+    ```
 > How to use
 
 ```

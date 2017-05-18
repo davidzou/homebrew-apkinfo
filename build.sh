@@ -18,7 +18,7 @@ cp -r src/tools ${BUILD_HOME}
 cp src/apkinfo ${BUILD_HOME}
 
 rm tarball/${FILE_NAME}
-tar -cvf tarball/${FILE_NAME} -C ${BUILD_HOME} apkinfo tools/
+tar -cvf tarball/${FILE_NAME} -C ${BUILD_HOME} apkinfo.sh tools/
 tar -zvtf tarball/${FILE_NAME}
 SHA256=`shasum -a 256 tarball/${FILE_NAME} | cut -d " " -f1`
 
