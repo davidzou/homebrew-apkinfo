@@ -7,6 +7,7 @@
 
 VERSION=0.0.1
 BUILD_HOME=build/apkinfo/${VERSION}/
+FILE_NAME=apkinfo.tar
 
 if [ -d build ] ; then
     rm -rf build
@@ -16,10 +17,10 @@ mkdir -p ${BUILD_HOME}
 cp -r src/tools ${BUILD_HOME}
 cp src/apkinfo ${BUILD_HOME}
 
-rm tarball/apkinfo.tar.gz
-tar -zcf tarball/apkinfo.tar.gz -C build apkinfo/
-tar tf tarball/apkinfo.tar.gz
-SHA256=`shasum -a 256 tarball/apkinfo.tar.gz | cut -d " " -f1`
+rm tarball/${FILE_NAME}
+tar -cvf tarball/${FILE_NAME} -C build apkinfo/
+tar tf tarball/${FILE_NAME}
+SHA256=`shasum -a 256 tarball/${FILE_NAME} | cut -d " " -f1`
 
 echo "========================================================="
 echo ${SHA256}
