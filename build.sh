@@ -27,7 +27,9 @@ echo ${SHA256}
 echo "========================================================="
 
 sed -ig "s/sha256.*/sha256 '${SHA256}'/g" Formula/apkinfo.rb
+
 rm Formula/apkinfo.rbg
+rm -rf build
 
 #cat Formula/apkinfo.rb
 
