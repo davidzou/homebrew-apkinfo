@@ -15,6 +15,14 @@
 #
 # ****************************************************************************************
 
+########################
+# 打印输出给定的帮助文件
+# Example： print_help_file ${ROOT}/function/hjbuild_option_help.txt
+########################
+function print_help_file(){
+    awk '{print $0}' $1
+}
+
 function printInfo(){
     echo "[Info] $1"
 }

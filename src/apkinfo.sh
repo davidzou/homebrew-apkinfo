@@ -17,7 +17,7 @@
 
 # 命令版本
 APKINFO_VERSION="0.0.1"
-BREW_HOME="/usr/local/Cellar/apkinfo.sh/${APKINFO_VERSION}"
+BREW_HOME="/usr/local/Cellar/apkinfo/${APKINFO_VERSION}"
 
 ######################
 # 检测系统是否配置了aapt命令
@@ -77,7 +77,6 @@ else
     ROOT=`cat ~/.apkinfo/apkinfo.rc | grep apkinfo.home | cut -d = -f2-`
 fi
 
-echo ${ROOT}
 # Loading Dependencies
 . ${ROOT}/tools/logger.sh
 . ${ROOT}/tools/apkinfo_options_help.sh
