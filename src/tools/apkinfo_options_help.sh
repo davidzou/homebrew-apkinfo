@@ -54,7 +54,7 @@ if [ $# -gt 0 ] ; then
                         shift
                         ;;
                     *)
-                        if [[ $1 =~ ".*apk$" ]] ; then
+                        if [[ "$1" =~ '.*apk$' ]] ; then
                             APK_FILE=$1
                             shift $#
                         else
