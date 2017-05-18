@@ -49,12 +49,14 @@ if [ $# -gt 0 ] ; then
             case "$1" in
                     -f | --apk-file)
                         shift
+                        APK_FILE=$1
+                        shift
                         ;;
                     --)
                         shift
                         ;;
                     *)
-                        if [[ "$1" =~ '.*apk$' ]] ; then
+                        if [[ "$1" == *'.apk' ]] ; then
                             APK_FILE=$1
                             shift $#
                         else
