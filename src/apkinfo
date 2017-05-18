@@ -77,4 +77,5 @@ echo ${pwd}
 echo ${0}
 echo ${pwd}/${0}
 
-find -L ${0} -name "tools"
+PATH=`find -L ${0} -name "tools"`
+echo ${PATH}
