@@ -1,3 +1,4 @@
 .idea/
 apkinfo.iml
 .DS_Store
+build/
