@@ -82,10 +82,9 @@ fi
 . ${ROOT}/tools/apkinfo_options_help.sh
 
 
-printInfo "Hello erery body!!!"
+printInfo "Hello every body!!!"
 
 check_command_aapt
 printInfo "The command 'aapt' be found at ${AAPT_HOME}"
 
-#getValue ${APK_FILE} versionName 2
-echo ${APK_FILE}
+getValue ${APK_FILE} versionName 2
