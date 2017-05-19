@@ -24,16 +24,19 @@ BREW_HOME="/usr/local/Cellar/apkinfo/${APKINFO_VERSION}"
 #     返回值为${AAPT_HOME}
 ######################
 function check_command_aapt() {
-    if [ -z `which aapt` ] ; then
+    RESULT=`which aapt`
+    if [ -z ${RESULT} ] ; then
         if [ -n "${ANDROID_SDK_HOME}" ] ; then
             version=`ls ${ANDROID_SDK_HOME}/build-tools/ | tail -n 1`
             AAPT_HOME=${ANDROID_SDK_HOME}/build-tools/${version}
+        elif [ -n "${ANDROID_HOME}" ] ; then
+            version=`ls ${ANDROID_HOME}/build-tools/ | tail -n 1`
+            AAPT_HOME=${ANDROID_HOME}/build-tools/${version}
         else
             echo "Not find command 'aapt'. Please setup it, or export env variant ANDROID_SDK_HOME"
             exit 1
         fi
     else
-        RESULT=`which aapt`
         AAPT_HOME=${RESULT%/*}
     fi
 }
@@ -56,7 +59,7 @@ function getValue(){
 #  Example : aapt dump --include-meta-data badging xxx.apk | grep XXX | cut -d = -f3 | perl -p -e "s/\'//g"
 ######################
 function getValueMeta(){
-    value=`aapt dump --include-meta-data badging $1 | grep \'$2 | cut -d = -f3 | perl -p -e "s/\'//g"`
+    value=`${AAPT_HOME}/aapt dump --include-meta-data badging $1 | grep \'$2 | cut -d = -f3 | perl -p -e "s/\'//g"`
     echo ${value}
 }
 
@@ -87,9 +90,9 @@ printInfo "Hello every body!!!"
 check_command_aapt
 printInfo "The command 'aapt' be found at ${AAPT_HOME}"
 
-packagename=`getValue $1 versionName 2`
-versionCode=`getValue $1 versionName 3`
-versionName=`getValue $1 versionName 4`
+packagename=`getValue ${APK_FILE} versionName 2`
+versionCode=`getValue ${APK_FILE} versionName 3`
+versionName=`getValue ${APK_FILE} versionName 4`
 
 pstr=$(printf "%-${#packagename}s" "-")
 nstr=$(printf "%-${#versionName}s" "-")
