@@ -15,9 +15,9 @@
 #
 # ****************************************************************************************
 # 可接受的参数缩写
-ALIAS_OPTIONS="f:h"
+ALIAS_OPTIONS="f:vh"
 # 可接受的标准参数
-LONG_OPTIONS="apk-file:help"
+LONG_OPTIONS="apk-file:,language:,version,help"
 
 ########################
 # 显示帮助内容
@@ -51,6 +51,13 @@ if [ $# -gt 0 ] ; then
                         shift
                         APK_FILE=$1
                         shift
+                        ;;
+                    --language)
+                        # 自定义语言设置
+                        ;;
+                    -v | --version)
+                        echo "apkinfo-${APKINFO_VERSION}"
+                        exit 0
                         ;;
                     --)
                         shift
