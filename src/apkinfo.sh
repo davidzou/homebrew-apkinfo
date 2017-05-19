@@ -87,4 +87,21 @@ printInfo "Hello every body!!!"
 check_command_aapt
 printInfo "The command 'aapt' be found at ${AAPT_HOME}"
 
-getValue ${APK_FILE} versionName 2
+packagename=`getValue $1 versionName 2`
+versionCode=`getValue $1 versionName 3`
+versionName=`getValue $1 versionName 4`
+
+pstr=$(printf "%-${#packagename}s" "-")
+nstr=$(printf "%-${#versionName}s" "-")
+cstr=$(printf "%-${#versionCode}s" "-")
+
+echo ""
+echo "| PackageName | VersionName | VersionCode |"
+echo ""
+echo "+-${pstr// /-}-+-${nstr// /-}-+-${cstr// /-}-+"
+echo "| $packagename | $versionName | $versionCode |"
+echo "+-${pstr// /-}-+-${nstr// /-}-+-${cstr// /-}-+"
+echo ""
+
+echo "All 'meta-data' from apk."
+aapt dump --include-meta-data badging ${APK_FILE} | grep meta-data | cut -d " " -f2-3 | cut -d "'" -f2,4 | column -t -s "'" | sort
