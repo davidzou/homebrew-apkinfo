@@ -19,7 +19,7 @@ sed -ig "s/APKINFO_VERSION=.*/APKINFO_VERSION=\"${VERSION}\"/g" ${BUILD_HOME}/ap
 sed -ig "s/#  version.*/#  version    : ${VERSION}/g" ${BUILD_HOME}/apkinfo.sh
 sed -ig "s/#  version.*/#  version    : ${VERSION}/g" ${BUILD_HOME}/tools/apkinfo_options_help.sh
 sed -ig "s/Version :.*/Version :       ${VERSION}/g" ${BUILD_HOME}/tools/apkinfo_options_help.txt
-sed -ig "s/\.TH man 1 \".*/\.TH man 1 \"10 May 2017\" \"${VERSION}\" \"apkinfo man page\"/g" ${BUILD_HOME}/apkinfo.1
+sed -ig "s/\.TH man 8 \".*/\.TH man 8 \"10 May 2017\" \"${VERSION}\" \"apkinfo man page\"/g" ${BUILD_HOME}/apkinfo.1
 sed -ig "s/#  version.*/#  version    : ${VERSION}/g" ${BUILD_HOME}/tools/table.sh
 sed -ig "s/#  version.*/#  version    : ${VERSION}/g" ${BUILD_HOME}/tools/logger.sh
 sed -ig "s/#  version.*/#  version    : ${VERSION}/g" ${BUILD_HOME}/tools/apkinfo_i18n.sh
