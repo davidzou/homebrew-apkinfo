@@ -2,7 +2,7 @@
 # ****************************************************************************************
 #  [脚本标题描述] 
 #  version    : 1.0.0
-#  author     : davidzou
+#  author     : DavidZou
 #  date       : 2017.05.10
 #
 #  [功能]:
@@ -57,6 +57,11 @@ if [ $# -gt 0 ] ; then
                         ;;
                     -v | --version)
                         echo "apkinfo-${APKINFO_VERSION}"
+                        exit 0
+                        ;;
+                    -h | --help)
+                        shift
+                        show_help
                         exit 0
                         ;;
                     --)

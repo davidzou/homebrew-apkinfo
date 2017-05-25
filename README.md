@@ -1,6 +1,8 @@
 # apkinfo
 A command what to look up a apk info, that include meta-data applicationid versioncode versionname etc.
 
+![image](docs/images/apkinfo.gif)
+
 # How to
 
 > How to install
@@ -9,7 +11,7 @@ A command what to look up a apk info, that include meta-data applicationid versi
 
     ```
      brew tap davidzou/apkinfo
-     brew instal apkinfo
+     brew install apkinfo
     ```
 
 * shell

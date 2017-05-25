@@ -17,6 +17,7 @@
 
 # 命令版本
 APKINFO_VERSION="0.0.1"
+# HomeBrew默认安装目录
 BREW_HOME="/usr/local/Cellar/apkinfo/${APKINFO_VERSION}"
 
 ######################
@@ -63,14 +64,29 @@ function getValueMeta(){
     echo ${value}
 }
 
+function getAllMetadata(){
+    value=(`${AAPT_HOME}/aapt dump --include-meta-data badging ${1} | grep meta-data | cut -d " " -f2-3 | cut -d "'" -f2,4 | sort -u`)
+}
+
 # ====================
 # 环境参数及类管理
 # ====================
 # 如果配置文件存在的则读取配置文件，deploy的和brew安装的区别就是不会创建文件夹
 if [ ! -d ~/.apkinfo ] ; then
+    # 创建配置目录
     mkdir -p ~/.apkinfo
-    echo "apkinfo.home=${BREW_HOME}/include" > ~/.apkinfo/apkinfo.rc
-    ROOT=${BREW_HOME}/include
+    # 查找命令
+    ROOT=`which apkinfo`
+    if [ -z ${ROOT} ] ; then
+        # brew 安装的在/usr/local/bin/apkinfo的软链。
+        echo "[Error] Install failed. To retry invoked deploy.sh or install by brew."
+        exit 1
+    fi
+    # 如果有apkinfo命令，如果是brew安装的他是一个软链，设置为默认安装目录，不排除个人设置
+    if [[ ${ROOT} =~ "/usr/local/bin" ]] ; then
+        echo "apkinfo.home=${BREW_HOME}/include" > ~/.apkinfo/apkinfo.rc
+        ROOT=${BREW_HOME}/include
+    fi
 else
     # 读取命令所在的目录
     if [ ! -f ~/.apkinfo/apkinfo.rc ] ; then
@@ -83,6 +99,7 @@ fi
 # Loading Dependencies
 . ${ROOT}/tools/logger.sh
 . ${ROOT}/tools/apkinfo_options_help.sh
+. ${ROOT}/tools/table.sh
 
 
 printInfo "Hello every body!!!"
@@ -90,21 +107,13 @@ printInfo "Hello every body!!!"
 check_command_aapt
 printInfo "The command 'aapt' be found at ${AAPT_HOME}"
 
-packagename=`getValue ${APK_FILE} versionName 2`
-versionCode=`getValue ${APK_FILE} versionName 3`
-versionName=`getValue ${APK_FILE} versionName 4`
-
-pstr=$(printf "%-${#packagename}s" "-")
-nstr=$(printf "%-${#versionName}s" "-")
-cstr=$(printf "%-${#versionCode}s" "-")
-
-echo ""
-echo "| PackageName | VersionName | VersionCode |"
-echo ""
-echo "+-${pstr// /-}-+-${nstr// /-}-+-${cstr// /-}-+"
-echo "| $packagename | $versionName | $versionCode |"
-echo "+-${pstr// /-}-+-${nstr// /-}-+-${cstr// /-}-+"
-echo ""
-
-echo "All 'meta-data' from apk."
-aapt dump --include-meta-data badging ${APK_FILE} | grep meta-data | cut -d " " -f2-3 | cut -d "'" -f2,4 | column -t -s "'" | sort
+createTable 10 2
+addRow "PackageName" `getValue ${APK_FILE} versionName 2`
+addRow "VersionName" `getValue ${APK_FILE} versionName 3`
+addRow "VersionCode" `getValue ${APK_FILE} versionName 4`
+getAllMetadata ${APK_FILE}
+for meta in ${value[@]}
+do
+    addRow "${meta%%\'*}" "${meta#*\'}"
+done
+printTable

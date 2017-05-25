@@ -30,11 +30,15 @@ function deployed() {
 
 #    echo "export PATH=\$PATH:$1" >> ~/.bash_profile
 #    source ~/.bash_profile
+
+# install man1
+#install -g 0 -o 0 -m 0644 apkinfo.1 /usr/share/man/man8/
+#gzip /usr/share/man/man8/apkinfo.1
 }
 
 if [ -n "$1" ] ; then
     echo "It deployed to $1"
-    deployed $1
+    deployed "$1"
 else
     echo "It need a path for install command apkinfo."
 fi
