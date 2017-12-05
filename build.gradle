@@ -138,7 +138,7 @@ task distTar(type: Tar) {
     description "将命名打包成可以使用的命令"
     logger.quiet("tar zip version: " + build_version)
     from "$project.buildDir"
-    into "$build_basename-v$build_version"
+//    into "$build_basename-v$build_version"
     extension "tar.gz"
     baseName "$build_basename"
     appendix 'command'
