@@ -48,7 +48,7 @@ gradle --no-daemon -Pbuild.version=${VERSION} clean build
 gradle --no-daemon -Pbuild.version=${VERSION} distTar
 
 # 发布包名
-TAR_NAME=apkinfo-command-v${VERSION}.tar.gz
+TAR_NAME=apkinfo-command-v${VERSION}.tar
 
 # 生成校验码
 SHA256=`shasum -a 256 tarball/apkinfo_${VERSION}/${TAR_NAME} | cut -d " " -f1`
