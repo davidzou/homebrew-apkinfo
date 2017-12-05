@@ -58,14 +58,14 @@ function addRow(){
     for(( w=0;w<${#INNER[@]};w++ ))
     do
         cell=${INNER[$w]}
-        echo "calculate max width ${INNER[w]}"
+#        echo "calculate max width ${INNER[w]}"
         len=$(printf "%-${#cell}s" "-")
         if (( ${#WIDTH[w]} < ${#len} )) ; then
             WIDTH[w]=${len}
         else
             COMPLEMENT=`expr ${#WIDTH[k]} - ${#len}`
         fi
-        echo "width ${#WIDTH[w]}"
+#        echo "width ${#WIDTH[w]}"
     done
 
     # 行数可增加
