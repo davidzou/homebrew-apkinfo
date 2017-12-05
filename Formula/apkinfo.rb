@@ -8,6 +8,7 @@ class Apkinfo < Formula
   def install
     bin.install "apkinfo"
     include.install "tools"
+    include.install "options"
     man1.install "apkinfo.1"
   end
 end
