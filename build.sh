@@ -47,8 +47,10 @@ gradle --no-daemon -Pbuild.version=${VERSION} clean build
 ## 发布
 gradle --no-daemon -Pbuild.version=${VERSION} distTar
 
+TAR_NAME=apkinfo-command-v${VERSION}.tar
+
 # 生成校验码
-SHA256=`shasum -a 256 tarball/apkinfo_${VERSION}/apkinfo-command-v${VERSION}.tar.gz | cut -d " " -f1`
+SHA256=`shasum -a 256 tarball/apkinfo_${VERSION}/${TAR_NAME} | cut -d " " -f1`
 echo "========================================================="
 echo ${SHA256}
 echo "========================================================="
@@ -56,12 +58,13 @@ echo "========================================================="
 # 替换校验码
 sed -ig "s/sha256.*/sha256 '${SHA256}'/g" Formula/apkinfo.rb
 sed -ig "s/version.*/version '${VERSION}'/g" Formula/apkinfo.rb
-sed -id "s/url.*/url 'https:\/\/github.com\/davidzou\/homebrew-apkinfo\/blob\/master\/tarball\/apkinfo_${VERSION}\/apkinfo-command-v${VERSION}.tar.gz?raw=true'/g" Formula/apkinfo.rb
+sed -ig "s/url.*/url 'https:\/\/github.com\/davidzou\/homebrew-apkinfo\/blob\/master\/tarball\/apkinfo_${VERSION}\/${TAR_NAME}?raw=true'/g" Formula/apkinfo.rb
 rm Formula/apkinfo.rbg
 
 #cat Formula/apkinfo.rb
 
 #rm ~/Library/Caches/Homebrew/apkinfo*
+#rm -rf /usr/local/Homebrew/Library/Taps/davidzou/
 #
 #git a && git cm "update" && git push
 #
