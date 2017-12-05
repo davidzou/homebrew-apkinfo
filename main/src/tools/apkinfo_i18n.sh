@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # ****************************************************************************************
 #  [脚本标题描述] 
-#  version    : 1.0.0
-#  author     : davidzou
-#  date       : 2017.05.19
+#  version    : @version@
+#  author     : @author@
+#  date       : @date@
 #
 #  [功能]:
 #

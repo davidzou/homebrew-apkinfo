@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # ****************************************************************************************
 #  [脚本标题描述] 
-#  version    : 0.0.3
-#  author     : DavidZou
-#  date       : 2017.05.10
+#  version    : @version@
+#  author     : @author@
+#  date       : @date@
 #
-#  [功能]:
+#  [功能]:    提供apkinfo参数选项
 #
 #  [执行流程]:
 #
@@ -14,10 +14,11 @@
 #  [环境配置]:
 #
 # ****************************************************************************************
+
 # 可接受的参数缩写
 ALIAS_OPTIONS="f:vh"
 # 可接受的标准参数
-LONG_OPTIONS="apk-file:,language:,version,help"
+LONG_OPTIONS="apk-file:,language:,version,help,pull"
 
 ########################
 # 显示帮助内容
@@ -54,6 +55,7 @@ if [ $# -gt 0 ] ; then
                         ;;
                     --language)
                         # 自定义语言设置
+                        # I don't known what i do at that times.
                         ;;
                     -v | --version)
                         echo "apkinfo-${APKINFO_VERSION}"
@@ -63,6 +65,12 @@ if [ $# -gt 0 ] ; then
                         shift
                         show_help
                         exit 0
+                        ;;
+                    --pull)
+                        shift
+                        # pull package name
+                        PACKAGE_NAME=$1
+                        shift
                         ;;
                     --)
                         shift
@@ -81,4 +89,9 @@ if [ $# -gt 0 ] ; then
 else
     show_help
     exit 0
+fi
+
+if [ ! -z ${PACKAGE_NAME} ] ; then
+    # enable support pull and exec adb pull, and how to output it
+    printInfo "xxx ${PACKAGE_NAME}"
 fi

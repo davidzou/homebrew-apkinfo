@@ -1,9 +1,9 @@
 #!/bin/bash
 # ****************************************************************************************
 #  [脚本标题描述]
-#  version    : 0.0.1
-#  author     : DavidZou -- wearecisco@gmail.com
-#  date       : 2017.05.07
+#  version    : @version@
+#  author     : @author@
+#  date       : @date@
 #
 #  [功能]: 通过命令行查看apk包中的信息
 #
@@ -16,7 +16,7 @@
 # ****************************************************************************************
 
 # 命令版本
-APKINFO_VERSION="0.0.1"
+APKINFO_VERSION="@version@"
 # HomeBrew默认安装目录
 BREW_HOME="/usr/local/Cellar/apkinfo/${APKINFO_VERSION}"
 
@@ -98,7 +98,7 @@ fi
 
 # Loading Dependencies
 . ${ROOT}/tools/logger.sh
-. ${ROOT}/tools/apkinfo_options_help.sh
+. ${ROOT}/options/apkinfo_options_help.sh
 . ${ROOT}/tools/table.sh
 
 

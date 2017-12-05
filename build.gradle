@@ -1,0 +1,156 @@
+import org.apache.tools.ant.filters.FixCrLfFilter
+import org.apache.tools.ant.filters.ReplaceTokens
+
+// gradle.properties中配置的版本号
+def key_build_version="build.version"
+// gradle.properties中配置的目标地址（安装地址）
+def key_build_dist="build.dist"
+// 基础名称，构建tar的名称前缀
+def key_build_basename="build.basename"
+
+def DEFAULT_VERSION="0.0.0"
+def DEFAULT_BASENAME="apkinfo"
+
+// 项目打包执行的时间获取
+def projectBuildDate = new Date().format("yyyy.MM.dd")
+def build_version = project.hasProperty(key_build_version)?getProperty(key_build_version):DEFAULT_VERSION
+def author = "DavidZou  --  wearecisco@gmail.com"
+def build_basename = project.hasProperty(key_build_basename)?getProperty(key_build_basename):DEFAULT_BASENAME
+
+
+def apkinfoSpec = project.copySpec {
+    from ('main/src/') {
+        include 'apkinfo.sh', 'apkinfo.1', 'install.sh', 'uninstall.sh'
+        rename { fileName ->
+            fileName.replace('.sh', '')
+        }
+        filter(FixCrLfFilter)
+        filter(ReplaceTokens, tokens: [date: projectBuildDate, version: build_version, author: author])
+        filteringCharset = 'UTF-8'
+    }
+}
+
+def apkinfoOptionSpec = project.copySpec {
+    from ('main/src/options/') {
+        include 'apkinfo_options_help.sh', 'apkinfo_options_help.txt'
+        filter(FixCrLfFilter)
+        filter(ReplaceTokens, tokens: [date: projectBuildDate, version: build_version, author: author])
+        filteringCharset = 'UTF-8'
+    }
+}
+
+def apkinfoToolsSpec = project.copySpec {
+    from ('main/src/tools/') {
+        include '*.sh'
+        filter(FixCrLfFilter)
+        filter(ReplaceTokens, tokens: [date: projectBuildDate, version: build_version, author: author])
+        filteringCharset = 'UTF-8'
+    }
+}
+
+/**
+ * 清理临时编译目录
+ */
+task clean(type: Delete, description: "清理build目录") {
+    def dist = project.hasProperty(key_build_dist) ? getProperty(key_build_dist) : "$project.buildDir"
+    logger.quiet("Delete dir 'build' -- " + dist)
+    delete dist
+}
+
+/**
+ *
+ * 前期准备，工作目录的创建
+ * 所有命令都依赖与当前定义的目录结构
+ * <pre>
+ * |- common/
+ * |- log/
+ * |- options/
+ * |- tools/
+ * |_ ...
+ * </pre>
+ */
+task preBuild() {
+    description "初始化命令环境"
+    doLast {
+        def dist = project.hasProperty(key_build_dist) ? getProperty(key_build_dist) : "$project.buildDir"
+        char slash = dist.getAt(dist.size() - 1)
+        if (slash != '/') {
+            dist = dist.plus("/")
+        }
+        // 定义生成目录
+        ext.rootDir = dist
+        ext.toolsDir = dist.plus("tools")
+        ext.optionsDir = dist.plus("options")
+
+        logger.quiet("root dir -- " + rootDir)
+        logger.quiet("create tools dir -- " + toolsDir)
+        logger.quiet("create options dir -- " + optionsDir)
+
+        mkdir(toolsDir)
+        mkdir(optionsDir)
+    }
+}
+
+/**
+ * 仅发布hjdailybuild2命令，其中依赖的common
+ *
+ * <p>
+ * <em>使用命令参数定义发布目录, 使用参数-P</em>
+ * <pre>
+ * gradle -Pbuild.version=1.0.0 build
+ * </pre>
+ */
+task build(dependsOn: 'preBuild') {
+    description "执行编译命令"
+    doLast {
+        logger.quiet("deployCommandHJDailyBuild  $preBuild.rootDir")
+        copy {
+            into preBuild.rootDir
+            with apkinfoSpec
+        }
+        copy {
+            into preBuild.optionsDir
+            with apkinfoOptionSpec
+        }
+        copy {
+            into preBuild.toolsDir
+            with apkinfoToolsSpec
+        }
+    }
+}
+
+/**
+ * 将编译好的build文件打包成可使用的源码tar包，包含了自动安装和删除命令
+ *
+ * <p>
+ * <em>使用命令参数定义发布目录, 使用参数-P</em>
+ * <pre>
+ * gradle -Pbuild.version=1.0.0 distTar
+ * </pre>
+ * <em>使用配置文件定义参数</em>
+ *
+ * file -- gradle.properties
+ * <code>
+ *      build.version=1.0.0
+ * </code>
+ */
+task distTar(type: Tar) {
+    description "将命名打包成可以使用的命令"
+    logger.quiet("tar zip version: " + build_version)
+    from "$project.buildDir"
+    into "$build_basename-v$build_version"
+    extension "tar.gz"
+    baseName "$build_basename"
+    appendix 'command'
+    version "v$build_version"
+    destinationDir file("tarball/${build_basename}_${build_version}")
+    compression Compression.GZIP
+
+    doLast {
+        println distTar.archiveName
+    }
+}
+
+task sham256(type: Exec) {
+
+}

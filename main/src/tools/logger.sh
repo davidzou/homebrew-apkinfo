@@ -24,5 +24,6 @@ function print_help_file(){
 }
 
 function printInfo(){
-    echo "[Info] $1"
+    stamp=`date '+%y-%m-%d %H:%M:%S'`
+    echo "[${PROGRESS_NAME}][line ${BASH_LINENO}][$stamp][Info] $1"
 }

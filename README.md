@@ -14,7 +14,7 @@ A command what to look up a apk info, that include meta-data applicationid versi
      brew install apkinfo
     ```
 
-* shell
+* BashShell
     
     ```
      bash deploy.sh ${dest}

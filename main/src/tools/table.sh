@@ -30,7 +30,9 @@ index=0
 
 WIDTH=()
 
+########################
 # 创建表 设置给定的行和列
+########################
 function createTable(){
 #    echo "$1 * $2"
     row_num=$1
@@ -47,9 +49,23 @@ function addRow(){
     # 将每个单元格填充
     for cell in $@
     do
-#        echo $index $cell
         All_CELLS[$index]=${cell}
         index=`expr ${index} + 1`
+    done
+
+    # 计算最长宽度
+    INNER=($*)
+    for(( w=0;w<${#INNER[@]};w++ ))
+    do
+        cell=${INNER[$w]}
+        echo "calculate max width ${INNER[w]}"
+        len=$(printf "%-${#cell}s" "-")
+        if (( ${#WIDTH[w]} < ${#len} )) ; then
+            WIDTH[w]=${len}
+        else
+            COMPLEMENT=`expr ${#WIDTH[k]} - ${#len}`
+        fi
+        echo "width ${#WIDTH[w]}"
     done
 
     # 行数可增加
@@ -57,7 +73,6 @@ function addRow(){
     if (( $current_row_num != row_num )); then
         row_num=${current_row_num}
     fi
-#    echo "${row_num}*${column_num}(${current_row_num})"
 }
 
 #function addEmptyLine(){
@@ -90,14 +105,7 @@ function drawLine() {
     do
         cell=${INNER[k]}
         len=$(printf "%-${#cell}s" "-")
-        if (( ${#WIDTH[k]} < ${#len} )) ; then
-            WIDTH[k]=${len}
-            # 重新计算
-            k=0
-            return 2
-        else
-            COMPLEMENT=`expr ${#WIDTH[k]} - ${#len}`
-        fi
+        COMPLEMENT=`expr ${#WIDTH[k]} - ${#len}`
         LINE_TOP+="+-${WIDTH[k]// /-}-"
         LINE_CONTENT+="| ${cell} `printf "%${COMPLEMENT}s"`"
     done
@@ -110,10 +118,9 @@ function printTable(){
     ROWS=()
     for ((i=0;i<$row_num;i++))
     do
-        LINE=()
         for ((j=0;j<${column_num};j++))
         do
-            index=`expr $[$column_num*$i] + $j`
+            index=`expr $[$column_num*$i] + ${j}`
             LINE[j]=${All_CELLS[$index]}
         done
         drawLine ${LINE[@]}

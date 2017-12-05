@@ -1,9 +1,9 @@
 =========================================================================
                              Apkinfo shell
 =========================================================================
-Version :       0.0.3
-Author  :       DavidZou -- wearecisco@gmail.com
-Date    :       2017.05.10
+Version :       @version@
+Author  :       @author@
+Date    :       @date@
 
 Usage   :
         Command [-OPTION] VALUE
