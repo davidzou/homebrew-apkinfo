@@ -139,12 +139,12 @@ task distTar(type: Tar) {
     logger.quiet("tar zip version: " + build_version)
     from "$project.buildDir"
 //    into "$build_basename-v$build_version"
-    extension "tar"
+    extension "tar.gz"
     baseName "$build_basename"
     appendix 'command'
     version "v$build_version"
     destinationDir file("tarball/${build_basename}_${build_version}")
-    compression Compression.NONE
+    compression Compression.GZIP
 
     doLast {
         println distTar.archiveName

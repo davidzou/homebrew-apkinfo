@@ -47,7 +47,8 @@ gradle --no-daemon -Pbuild.version=${VERSION} clean build
 ## 发布
 gradle --no-daemon -Pbuild.version=${VERSION} distTar
 
-TAR_NAME=apkinfo-command-v${VERSION}.tar
+# 发布包名
+TAR_NAME=apkinfo-command-v${VERSION}.tar.gz
 
 # 生成校验码
 SHA256=`shasum -a 256 tarball/apkinfo_${VERSION}/${TAR_NAME} | cut -d " " -f1`
@@ -63,8 +64,12 @@ rm Formula/apkinfo.rbg
 
 #cat Formula/apkinfo.rb
 
-#rm ~/Library/Caches/Homebrew/apkinfo*
-#rm -rf /usr/local/Homebrew/Library/Taps/davidzou/
+# 安装文件存放目录(压缩吧)
+# rm ~/Library/Caches/Homebrew/apkinfo-0.0.3.tar
+# 源码下载地址
+# rm -rf /usr/local/Homebrew/Library/Taps/davidzou/
+# 压缩文件解压后目录
+# rm -rf /usr/local/Cellar/apkinfo
 #
 #git a && git cm "update" && git push
 #

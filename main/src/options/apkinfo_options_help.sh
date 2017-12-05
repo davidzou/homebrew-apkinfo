@@ -25,7 +25,7 @@ LONG_OPTIONS="apk-file:,language:,version,help,pull"
 #     -- 帮助有文件build_option_help.txt描述
 ########################
 function show_help() {
-    print_help_file ${ROOT}/tools/apkinfo_options_help.txt
+    print_help_file ${ROOT}/options/apkinfo_options_help.txt
 }
 
 ########################
