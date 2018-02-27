@@ -14,7 +14,7 @@ def DEFAULT_BASENAME="apkinfo"
 // 项目打包执行的时间获取
 def projectBuildDate = new Date().format("yyyy.MM.dd")
 def build_version = project.hasProperty(key_build_version)?getProperty(key_build_version):DEFAULT_VERSION
-def author = "DavidZou  --  wearecisco@gmail.com"
+def author = "DavidZou (wearecisco@gmail.com)"
 def build_basename = project.hasProperty(key_build_basename)?getProperty(key_build_basename):DEFAULT_BASENAME
 
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 当前版本号
-VERSION=0.0.4
+VERSION=0.0.5
 # 构建目录（build）
 BUILD_HOME=build/apkinfo/${VERSION}/
 # 发布文件包名
