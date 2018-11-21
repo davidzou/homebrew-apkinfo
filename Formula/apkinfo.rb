@@ -1,3 +1,5 @@
+require 'fileutils'
+
 class Apkinfo < Formula
   homepage ''
   url 'https://github.com/davidzou/homebrew-apkinfo/blob/master/tarball/apkinfo_0.0.7/apkinfo-command-v0.0.7.tar?raw=true'
