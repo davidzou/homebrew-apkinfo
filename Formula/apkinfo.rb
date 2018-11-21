@@ -1,5 +1,3 @@
-require 'fileutils'
-
 class Apkinfo < Formula
   homepage ''
   url 'https://github.com/davidzou/homebrew-apkinfo/blob/master/tarball/apkinfo_0.0.7/apkinfo-command-v0.0.7.tar?raw=true'
@@ -12,6 +10,11 @@ class Apkinfo < Formula
     include.install "tools"
     include.install "options"
     man1.install "apkinfo.1"
-    FileUtils.rm_rf("~/.apkinfo")
+    system "rm", "-rf", "~/.apkinfo"
   end
+
+  def uninstall
+    system "rm", "-rf", "~/.apkinfo"
+  end
+
 end
