@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 当前版本号
-VERSION=0.0.7
+VERSION=0.0.8
 # 发布文件包名
 FILE_NAME=apkinfo.tar
 
