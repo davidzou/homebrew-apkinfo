@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # ****************************************************************************************
 #  [脚本标题描述]
-#  version    : 1.0.0
-#  author     : DavidZou -- wearecisco@gmail.com
-#  date       : 2017.05.10
+#  version    : @version@
+#  author     : @author@
+#  date       : @date@
 #
 #  [功能]:
 #
@@ -26,4 +26,9 @@ function print_help_file(){
 function printInfo(){
     stamp=`date '+%y-%m-%d %H:%M:%S'`
     echo "[${PROGRESS_NAME}][line ${BASH_LINENO}][$stamp][Info] $1"
+}
+
+function printError(){
+    stamp=`date '+%y-%m-%d %H:%M:%S'`
+    echo "[${PROGRESS_NAME}][line ${BASH_LINENO}][$stamp][Error] $1"
 }

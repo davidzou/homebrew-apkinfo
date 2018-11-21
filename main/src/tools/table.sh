@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # ****************************************************************************************
 #  [脚本标题描述] 
-#  version    : 1.0.0
-#  author     : davidzou
-#  date       : 2017.05.22
+#  version    : @version@
+#  author     : @author@
+#  date       : @date@
 #
 #  [功能]:
 #
@@ -93,7 +93,7 @@ function try(){
 }
 
 function drawLine() {
-    if [ $# != $column_num ]; then
+    if [[ $# != ${column_num} ]]; then
         echo "Can't draw line by $@ argument, it current is $column_num."
         exit 1
     fi
@@ -124,7 +124,7 @@ function printTable(){
             LINE[j]=${All_CELLS[$index]}
         done
         drawLine ${LINE[@]}
-        if [ $? == 2 ] ; then
+        if [[ $? == 2 ]] ; then
             i=-1
             j=-1
             ROWS=()

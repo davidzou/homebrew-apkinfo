@@ -25,7 +25,7 @@ LONG_OPTIONS="apk-file:,language:,version,help,pull"
 #     -- 帮助有文件build_option_help.txt描述
 ########################
 function show_help() {
-    print_help_file ${ROOT}/options/apkinfo_options_help.txt
+    print_help_file "${ROOT}/options/apkinfo_options_help.txt"
 }
 
 ########################
@@ -35,7 +35,7 @@ function show_help() {
 function init_option() {
     # 参数
     ARGS="`getopt "$1 --long $2" -- "$@"`"
-    if [ $? -ne 0 ] ; then
+    if [[ $? -ne 0 ]] ; then
         show_help
         exit 1
     fi
@@ -43,12 +43,13 @@ function init_option() {
 }
 
 init_option ${ALIAS_OPTIONS} ${LONG_OPTIONS}
-if [ $# -gt 0 ] ; then
+if [[ $# -gt 0 ]] ; then
     # 初始化参数
-    while [ $# -gt 0 ] ;
+    while [[ $# -gt 0 ]] ;
     do
             case "$1" in
                     -f | --apk-file)
+                        MODE="INFO"
                         shift
                         APK_FILE=$1
                         shift
@@ -59,6 +60,7 @@ if [ $# -gt 0 ] ; then
                         ;;
                     -v | --version)
                         echo "apkinfo-${APKINFO_VERSION}"
+                        echo "DavidZou -- wearecisco@gmail.com"
                         exit 0
                         ;;
                     -h | --help)
@@ -67,10 +69,29 @@ if [ $# -gt 0 ] ; then
                         exit 0
                         ;;
                     --pull)
+                        MODE="PULL"
                         shift
-                        # pull package name
-                        PACKAGE_NAME=$1
-                        shift
+                        if [[ -z $1 ]] || [[ "$1" == "list" ]] ; then
+                            # 查看安装包列表
+                            adb shell pm list packages -f -3
+                            exit 0
+                        else
+                            # pull package name
+                            PACKAGE_NAME=$1
+                            shift
+                            # 如果不存在则报错
+                            result=`adb shell pm list packages -f -3 \| grep ${PACKAGE_NAME}`
+                            if [[ -z ${result} ]] ; then
+                                printError "The app '${PACKAGE_NAME}' not exist."
+                                exit 0
+                            fi
+                            # package:/data/app/com.google.android.instantapps.supervisor-2/base.apk=com.google.android.instantapps.supervisor
+
+                            path=`echo ${result%=*} | cut -d ":" -f2`
+                            name=`echo ${result##*=}.apk`
+                            adb pull ${path} ${name}
+                            exit 0
+                        fi
                         ;;
                     --)
                         shift
@@ -91,7 +112,7 @@ else
     exit 0
 fi
 
-if [ ! -z ${PACKAGE_NAME} ] ; then
+if [[ ! -z ${PACKAGE_NAME} ]] ; then
     # enable support pull and exec adb pull, and how to output it
     printInfo "xxx ${PACKAGE_NAME}"
 fi

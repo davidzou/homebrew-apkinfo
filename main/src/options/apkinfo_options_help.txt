@@ -10,9 +10,13 @@ Usage   :
 
  [OPTION]
         -f | --apk-file    apk file
+        --pull             拉取apk
 
  [Example]
         apkinfo /path/to/xxx.apk
+
+        apkinfo --pull list
+        apkinfo --pull [packagename]
 
  [LEGACY DESCRIPTION]
 

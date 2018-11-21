@@ -26,11 +26,11 @@ BREW_HOME="/usr/local/Cellar/apkinfo/${APKINFO_VERSION}"
 ######################
 function check_command_aapt() {
     RESULT=`which aapt`
-    if [ -z ${RESULT} ] ; then
-        if [ -n "${ANDROID_SDK_HOME}" ] ; then
+    if [[ -z ${RESULT} ]] ; then
+        if [[ -n "${ANDROID_SDK_HOME}" ]] ; then
             version=`ls ${ANDROID_SDK_HOME}/build-tools/ | tail -n 1`
             AAPT_HOME=${ANDROID_SDK_HOME}/build-tools/${version}
-        elif [ -n "${ANDROID_HOME}" ] ; then
+        elif [[ -n "${ANDROID_HOME}" ]] ; then
             version=`ls ${ANDROID_HOME}/build-tools/ | tail -n 1`
             AAPT_HOME=${ANDROID_HOME}/build-tools/${version}
         else
@@ -68,16 +68,20 @@ function getAllMetadata(){
     value=(`${AAPT_HOME}/aapt dump --include-meta-data badging ${1} | grep meta-data | cut -d " " -f2-3 | cut -d "'" -f2,4 | sort -u`)
 }
 
+function getAllPermissions {
+    value=(`${AAPT_HOME}/aapt dump permissions ${1}`)
+}
+
 # ====================
 # 环境参数及类管理
 # ====================
 # 如果配置文件存在的则读取配置文件，deploy的和brew安装的区别就是不会创建文件夹
-if [ ! -d ~/.apkinfo ] ; then
+if [[ ! -d ~/.apkinfo ]] ; then
     # 创建配置目录
     mkdir -p ~/.apkinfo
     # 查找命令
     ROOT=`which apkinfo`
-    if [ -z ${ROOT} ] ; then
+    if [[ -z ${ROOT} ]] ; then
         # brew 安装的在/usr/local/bin/apkinfo的软链。
         echo "[Error] Install failed. To retry invoked deploy.sh or install by brew."
         exit 1
@@ -89,7 +93,7 @@ if [ ! -d ~/.apkinfo ] ; then
     fi
 else
     # 读取命令所在的目录
-    if [ ! -f ~/.apkinfo/apkinfo.rc ] ; then
+    if [[ ! -f ~/.apkinfo/apkinfo.rc ]] ; then
         echo "[Error] Install failed. To retry invoked deploy.sh or install by brew."
         exit 1
     fi
