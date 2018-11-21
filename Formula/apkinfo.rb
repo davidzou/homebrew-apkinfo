@@ -11,4 +11,8 @@ class Apkinfo < Formula
     include.install "options"
     man1.install "apkinfo.1"
   end
+
+  def uninstall
+     FileUtils.rm("~/.apkinfo")
+  end
 end
