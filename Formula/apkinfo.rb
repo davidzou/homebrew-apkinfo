@@ -10,9 +10,6 @@ class Apkinfo < Formula
     include.install "tools"
     include.install "options"
     man1.install "apkinfo.1"
-  end
-
-  def uninstall
-     FileUtils.rm("~/.apkinfo")
+    FileUtils.rm("~/.apkinfo")
   end
 end
