@@ -10,11 +10,11 @@ class Apkinfo < Formula
     include.install "tools"
     include.install "options"
     man1.install "apkinfo.1"
-    system "rm", "-rf", "~/.apkinfo"
+    cleanup_path "~/.apkinfo"
   end
 
   def uninstall
-    system "rm", "-rf", "~/.apkinfo"
+    cleanup_path "~/.apkinfo"
   end
 
 end
