@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 当前版本号
-VERSION=0.0.6
+VERSION=0.0.7
 # 发布文件包名
 FILE_NAME=apkinfo.tar
 
@@ -29,7 +29,8 @@ echo "========================================================="
 
 # 替换校验码
 sed -ig "s/sha256.*/sha256 '${SHA256}'/g" Formula/apkinfo.rb
-sed -ig "s/version.*/version '${VERSION}'/g" Formula/apkinfo.rb
+sed -ig "s/version '.*/version '${VERSION}'/g" Formula/apkinfo.rb
+sed -ig "s/applicationid version .*/applicationid version ${VERSION}'/g" Formula/apkinfo.rb
 sed -ig "s/url.*/url 'https:\/\/github.com\/davidzou\/homebrew-apkinfo\/blob\/master\/tarball\/apkinfo_${VERSION}\/${TAR_NAME}?raw=true'/g" Formula/apkinfo.rb
 
 
